@@ -1,25 +1,31 @@
 // https://github.com/edvinpontuslarsson/adaptable-health-forms/blob/main/client/public/custom/js/bookings.js
 
-/**
- * @returns 
- */
 function getGenerationsData() {
-  const currentYear = 'TODO'; // date.currentYear
+  const currentYear = 9999; // date.currentYear
 
+  // TODO sort
   const generations = [
     {
-      minYear: 1901,
+      title: 'Generation Alpha',
+      minYear: 2013,
+      maxYear: currentYear,
+      famousExamples: false,
     },
     {
-      maxYear: currentYear,
+      title: 'The Greatest Generation',
+      minYear: 1901,
+      maxYear: 1927,
+      famousExamples: ['Greta Garbo', 'Alan Watts'],
     },
   ];
 
+  const lowestMinYear = generations[0].minYear;
   const endIndex = generations.length - 1;
+  const highestMaxYear = generations[endIndex].maxYear;
 
   return {
-    globalMinYear: generations[0].minYear,
-    globalMaxYear: generations[endIndex].maxYear,
+    lowestMinYear,
+    highestMaxYear,
     generations,
   };
 }
