@@ -27,7 +27,7 @@ function getGenerationsData() {
       famousExamples: ['Jennifer Lopez', 'Elon Musk'],
     },
     {
-      title: 'Baby Boomers (or just Boomers)',
+      title: 'Baby Boomers (sometimes shortened to boomers)',
       minYear: 1946,
       maxYear: 1964,
       famousExamples: ['Arnold Schwarzenegger,', 'Oprah Winfrey'],
