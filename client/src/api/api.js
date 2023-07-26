@@ -1,7 +1,6 @@
 function getGenerationsData() {
   const currentYear = new Date().getFullYear();
 
-  // TODO sort
   const generations = [
     {
       title: 'Generation Alpha',
@@ -45,7 +44,7 @@ function getGenerationsData() {
       maxYear: 1927,
       famousExamples: ['Greta Garbo', 'Alan Watts'],
     },
-  ];
+  ].sort((a, b) => a.minYear < b.minYear);
 
   const lowestMinYear = generations[0].minYear;
   const endIndex = generations.length - 1;
