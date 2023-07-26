@@ -1,6 +1,5 @@
 import './App.css';
 import { useState } from 'react';
-import classnames from 'classnames';
 import { getGenerationsData } from './api/api';
 
 // TODO everything in 1 file first, divide later
@@ -38,11 +37,6 @@ function App() {
               onChange={(event) => {
                 setBirthYear(event.target.value);
               }}
-              // TODO if this doesn't work, see usage on line 89 here:
-              // https://github.com/edvinpontuslarsson/hbg-works-kodtest/blob/ASP.NET_version/web/src/components/CompanySection.js
-              className={classnames({
-                'error-border': invalidBirthYear,
-              })}
             />
           </div>
 
