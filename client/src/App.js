@@ -51,8 +51,8 @@ function App() {
             onClick={() => {
               const foundGeneration = generationsData.generations.find(
                 // e.g.
-                //       1991        1981           1991        1996
-                (gen) => birthYear > gen.minYear && birthYear < gen.maxYear
+                //       1991         1981           1991        1996
+                (gen) => birthYear >= gen.minYear && birthYear <= gen.maxYear
               );
 
               if (foundGeneration) {
