@@ -12,6 +12,36 @@ function getGenerationsData() {
       famousExamples: false,
     },
     {
+      title: 'Generation Z',
+      minYear: 1997,
+      maxYear: 2012,
+      famousExamples: ['MrBeast', 'Greta Thunberg'],
+    },
+    {
+      title: 'Millenials (Generation Y)',
+      minYear: 1981,
+      maxYear: 1996,
+      famousExamples: ['Taylor Swift', 'Mark Zuckerberg'],
+    },
+    {
+      title: 'Generation X',
+      minYear: 1965,
+      maxYear: 1980,
+      famousExamples: ['Jennifer Lopez', 'Elon Musk'],
+    },
+    {
+      title: 'Baby Boomers (or just Boomers)',
+      minYear: 1946,
+      maxYear: 1964,
+      famousExamples: ['Arnold Schwarzenegger,', 'Oprah Winfrey'],
+    },
+    {
+      title: 'The Silent Generation',
+      minYear: 1928,
+      maxYear: 1945,
+      famousExamples: ['Jane Fonda', 'Morgan Freeman'],
+    },
+    {
       title: 'The Greatest Generation',
       minYear: 1901,
       maxYear: 1927,
