@@ -9,7 +9,7 @@ import { getGenerationsData } from './api/api';
 
 function App() {
   const [birthYear, setBirthYear] = useState(0);
-  const [invalidBirthYear, setInvalidBirthYear] = useState(false);
+  const [invalidInput, setInvalidInput] = useState(false);
   const [userGeneration, setUserGeneration] = useState(null);
   const [displayInput, setDisplayInput] = useState(true);
 
@@ -38,6 +38,13 @@ function App() {
                 setBirthYear(event.target.value);
               }}
             />
+            {invalidInput && (
+              <label className="error-label">
+                Please enter a 4 digit number between{' '}
+                {generationsData.lowestMinYear} and{' '}
+                {generationsData.highestMaxYear}
+              </label>
+            )}
           </div>
 
           <button
@@ -51,10 +58,10 @@ function App() {
               if (foundGeneration) {
                 setUserGeneration(foundGeneration);
 
-                setInvalidBirthYear(false);
+                setInvalidInput(false);
                 setDisplayInput(false);
               } else {
-                // TODO err handling
+                setInvalidInput(true);
               }
             }}
           >
