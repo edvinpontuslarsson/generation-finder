@@ -1,5 +1,3 @@
-// https://github.com/edvinpontuslarsson/adaptable-health-forms/blob/main/client/public/custom/js/bookings.js
-
 function getGenerationsData() {
   const currentYear = 9999; // date.currentYear
 
