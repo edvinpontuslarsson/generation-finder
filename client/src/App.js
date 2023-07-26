@@ -7,7 +7,7 @@ import { useState } from 'react';
 // https://github.com/edvinpontuslarsson/hbg-works-kodtest/blob/ASP.NET_version/web/src/components/CompanySection.js
 
 function App() {
-  // const birthYear = 
+  const [birthYear, setBirthYear] = useState(0);
 
   return (
     <div className="App">
@@ -16,7 +16,9 @@ function App() {
         Please input your year of birth to see which generation you belong to.
       </p>
       <div>
-        <input></input>
+        <input 
+          type='number'
+        />
       </div>
     </div>
   );
