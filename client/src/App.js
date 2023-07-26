@@ -3,11 +3,6 @@ import { useState } from 'react';
 import classnames from 'classnames';
 import { getGenerationsData } from './api/api';
 
-// TODO everything in 1 file first, divide later
-
-// https://github.com/edvinpontuslarsson/hbg-works-kodtest/blob/ASP.NET_version/web/src/components/ApplicationForm.js
-// https://github.com/edvinpontuslarsson/hbg-works-kodtest/blob/ASP.NET_version/web/src/components/CompanySection.js
-
 function App() {
   const [birthYear, setBirthYear] = useState(0);
   const [invalidInput, setInvalidInput] = useState(false);
@@ -15,12 +10,6 @@ function App() {
   const [displayInput, setDisplayInput] = useState(true);
 
   const generationsData = getGenerationsData();
-
-  // TODO see here form validation & err msgs
-  // context too much here
-  // https://www.freecodecamp.org/news/how-to-validate-forms-in-react/
-
-  // TODO add button, yeah, that's fine actually, permanently
 
   return (
     <div className="App">
