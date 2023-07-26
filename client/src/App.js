@@ -9,10 +9,10 @@ import { getGenerationsData } from './api/api';
 // https://github.com/edvinpontuslarsson/hbg-works-kodtest/blob/ASP.NET_version/web/src/components/CompanySection.js
 
 function App() {
-  const [displayInput, setDisplayInput] = useState(true);
   const [birthYear, setBirthYear] = useState(0);
   const [invalidBirthYear, setInvalidBirthYear] = useState(false);
   const [userGeneration, setUserGeneration] = useState(null);
+  const [displayInput, setDisplayInput] = useState(true);
 
   const generationsData = getGenerationsData();
 
@@ -56,6 +56,8 @@ function App() {
 
               if (foundGeneration) {
                 setUserGeneration(foundGeneration);
+
+                setInvalidBirthYear(false);
                 setDisplayInput(false);
               } else {
                 // TODO err handling
@@ -83,6 +85,16 @@ function App() {
               </ul>
             </>
           )}
+          <button
+            onClick={() => {
+              setBirthYear(0);
+              setUserGeneration(null);
+
+              setDisplayInput(true);
+            }}
+          >
+            Try again with a different birthyear!
+          </button>
         </>
       )}
     </div>
