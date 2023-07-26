@@ -27,9 +27,9 @@ function App() {
               onChange={(event) => {
                 setBirthYear(event.target.value);
               }}
-              className={classnames({
+              className={`birth-year-input ${classnames({
                 'error-border': invalidInput,
-              })}
+              })}`}
             />
             {invalidInput && (
               <label className="error-label">
