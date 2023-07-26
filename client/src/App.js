@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react';
+import classnames from 'classnames';
 import { getGenerationsData } from './api/api';
 
 // TODO everything in 1 file first, divide later
@@ -37,6 +38,9 @@ function App() {
               onChange={(event) => {
                 setBirthYear(event.target.value);
               }}
+              className={classnames({
+                'error-border': invalidInput,
+              })}
             />
             {invalidInput && (
               <label className="error-label">
