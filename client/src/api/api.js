@@ -1,5 +1,5 @@
 function getGenerationsData() {
-  const currentYear = 9999; // date.currentYear
+  const currentYear = new Date().getFullYear();
 
   // TODO sort
   const generations = [
