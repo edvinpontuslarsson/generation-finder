@@ -3,5 +3,10 @@
 }
 
 .error-border {
-  border-color: red;
+  border-color: orange;
+}
+
+.error-label {
+  margin-left: 10px;
+  color: orange;
 }
