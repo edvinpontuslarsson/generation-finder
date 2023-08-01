@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import { getGenerationsData } from './api/api';
 
 function App() {
+  console.log(process.env.REACT_APP_HELLO);
+
   const [birthYear, setBirthYear] = useState(0);
   const [invalidInput, setInvalidInput] = useState(false);
   const [userGeneration, setUserGeneration] = useState(null);
