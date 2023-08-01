@@ -28,6 +28,7 @@ function App() {
 
   const generationsData = getGenerationsData();
 
+  // TODO all of this can be in 1 component, creates at least some separation
   return (
     <div className="App">
       <h1>Generation Finder</h1>
