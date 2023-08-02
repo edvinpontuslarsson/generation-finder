@@ -6,7 +6,7 @@ Web app to see which generation you belong to. Repo will include end-to-end test
 
 https://generation-finder.web.app/
 
-## Instructions
+## Docker Instructions
 
 ### Run with Docker
 
@@ -30,4 +30,12 @@ docker-compose down
 
 ```console
 docker-compose up --build
+```
+
+## Publish to Firebase Instructions
+
+```console
+cd client
+npm run build
+firebase deploy
 ```
