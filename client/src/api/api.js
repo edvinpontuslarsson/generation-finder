@@ -46,8 +46,6 @@ function getGenerationsData() {
     },
   ].sort((a, b) => a.minYear > b.minYear);
 
-  console.log(generations)
-
   const lowestMinYear = generations[0].minYear;
   const endIndex = generations.length - 1;
   const highestMaxYear = generations[endIndex].maxYear;
