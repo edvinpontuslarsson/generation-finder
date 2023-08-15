@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Cypress Documentation
+
+https://docs.cypress.io/guides/getting-started/opening-the-app
+
 ## Available Scripts
 
 In the project directory, you can run:
