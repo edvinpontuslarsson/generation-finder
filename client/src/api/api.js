@@ -44,7 +44,7 @@ function getGenerationsData() {
       maxYear: 1927,
       famousExamples: ['Greta Garbo', 'Alan Watts'],
     },
-  ].sort((a, b) => a.minYear > b.minYear);
+  ].sort((a, b) => a.minYear - b.minYear);
 
   const lowestMinYear = generations[0].minYear;
   const endIndex = generations.length - 1;
