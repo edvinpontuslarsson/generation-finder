@@ -58,7 +58,7 @@ function GenerationFinder() {
               }
             }}
           >
-            Submit
+            Find out!
           </button>
         </>
       )}
