@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { getGenerationsData } from '../api/api';
 
 function GenerationFinder() {
-  const [birthYear, setBirthYear] = useState(null);
+  const [birthYear, setBirthYear] = useState('');
   const [invalidInput, setInvalidInput] = useState(false);
   const [userGeneration, setUserGeneration] = useState(null);
   const [displayInput, setDisplayInput] = useState(true);
@@ -78,14 +78,14 @@ function GenerationFinder() {
               <h3>Famous examples:</h3>
               <ul>
                 {userGeneration.famousExamples.map((ex) => (
-                  <li>{ex}</li>
+                  <li key={ex.replace(/\s/g, '')}>{ex}</li>
                 ))}
               </ul>
             </>
           )}
           <button
             onClick={() => {
-              setBirthYear(null);
+              setBirthYear('');
               setUserGeneration(null);
 
               setDisplayInput(true);
