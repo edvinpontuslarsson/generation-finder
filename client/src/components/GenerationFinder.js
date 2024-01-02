@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { getGenerationsData } from '../api/api';
 
 function GenerationFinder() {
-  const [birthYear, setBirthYear] = useState(null);
+  const [birthYear, setBirthYear] = useState('');
   const [invalidInput, setInvalidInput] = useState(false);
   const [userGeneration, setUserGeneration] = useState(null);
   const [displayInput, setDisplayInput] = useState(true);
@@ -85,7 +85,7 @@ function GenerationFinder() {
           )}
           <button
             onClick={() => {
-              setBirthYear(null);
+              setBirthYear('');
               setUserGeneration(null);
 
               setDisplayInput(true);
