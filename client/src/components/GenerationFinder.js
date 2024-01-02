@@ -3,12 +3,29 @@ import classnames from 'classnames';
 import { getGenerationsData } from '../api/api';
 
 function GenerationFinder() {
-  const [birthYear, setBirthYear] = useState(0);
+  const [birthYear, setBirthYear] = useState('');
   const [invalidInput, setInvalidInput] = useState(false);
   const [userGeneration, setUserGeneration] = useState(null);
   const [displayInput, setDisplayInput] = useState(true);
 
   const generationsData = getGenerationsData();
+
+  const handleUserGenerationLogic = () => {
+    const foundGeneration = generationsData.generations.find(
+      // e.g.
+      //       1991         1981           1991         1996
+      (gen) => birthYear >= gen.minYear && birthYear <= gen.maxYear
+    );
+
+    if (foundGeneration) {
+      setUserGeneration(foundGeneration);
+
+      setInvalidInput(false);
+      setDisplayInput(false);
+    } else {
+      setInvalidInput(true);
+    }
+  };
 
   return (
     <>
@@ -21,10 +38,17 @@ function GenerationFinder() {
           </p>
           <div>
             <input
+              autoFocus
               type="number"
               value={birthYear}
+              placeholder="Birth year"
               onChange={(event) => {
                 setBirthYear(event.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleUserGenerationLogic();
+                }
               }}
               className={`birth-year-input ${classnames({
                 'error-border': invalidInput,
@@ -39,26 +63,7 @@ function GenerationFinder() {
             )}
           </div>
 
-          <button
-            onClick={() => {
-              const foundGeneration = generationsData.generations.find(
-                // e.g.
-                //       1991         1981           1991         1996
-                (gen) => birthYear >= gen.minYear && birthYear <= gen.maxYear
-              );
-
-              if (foundGeneration) {
-                setUserGeneration(foundGeneration);
-
-                setInvalidInput(false);
-                setDisplayInput(false);
-              } else {
-                setInvalidInput(true);
-              }
-            }}
-          >
-            Submit
-          </button>
+          <button onClick={handleUserGenerationLogic}>Find out!</button>
         </>
       )}
 
@@ -71,16 +76,27 @@ function GenerationFinder() {
           {userGeneration.famousExamples && (
             <>
               <h3>Famous examples:</h3>
-              <ul>
-                {userGeneration.famousExamples.map((ex) => (
-                  <li>{ex}</li>
+              <div className="celebrity-list">
+                {userGeneration.famousExamples.map((celebrityObject) => (
+                  <div
+                    className="celebrity-card"
+                    key={celebrityObject.name.replace(/\s/g, '')}
+                  >
+                    <a
+                      href={celebrityObject.wikiLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {celebrityObject.name} ({celebrityObject.birthYear})
+                    </a>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </>
           )}
           <button
             onClick={() => {
-              setBirthYear(0);
+              setBirthYear('');
               setUserGeneration(null);
 
               setDisplayInput(true);

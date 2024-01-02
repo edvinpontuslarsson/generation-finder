@@ -1,4 +1,3 @@
-import './App.css';
 import GenerationFinder from './components/GenerationFinder';
 import { initializeApp } from 'firebase/app';
 
