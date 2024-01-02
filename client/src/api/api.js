@@ -1,11 +1,9 @@
 function getGenerationsData() {
-  const currentYear = new Date().getFullYear();
-
   const generations = [
     {
       title: 'Generation Alpha',
       minYear: 2013,
-      maxYear: currentYear,
+      maxYear: 2024,
       famousExamples: false,
     },
     {
