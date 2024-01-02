@@ -4,7 +4,13 @@ function getGenerationsData() {
       title: 'Generation Alpha',
       minYear: 2013,
       maxYear: 2024,
-      famousExamples: false,
+      famousExamples: [
+        {
+          name: 'ChatGPT',
+          birthYear: '2022',
+          wikiLink: 'https://en.wikipedia.org/wiki/ChatGPT',
+        },
+      ]
     },
     {
       title: 'Generation Z',
