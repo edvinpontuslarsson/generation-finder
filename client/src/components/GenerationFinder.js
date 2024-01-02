@@ -21,6 +21,7 @@ function GenerationFinder() {
           </p>
           <div>
             <input
+              autoFocus
               type="number"
               value={birthYear}
               placeholder='Birth year'
