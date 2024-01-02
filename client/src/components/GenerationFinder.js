@@ -77,8 +77,8 @@ function GenerationFinder() {
             <>
               <h3>Famous examples:</h3>
               <ul>
-                {userGeneration.famousExamples.map((ex) => (
-                  <li key={ex.replace(/\s/g, '')}>{ex}</li>
+                {userGeneration.famousExamples.map((celeb) => (
+                  <li key={celeb.replace(/\s/g, '')}>{celeb}</li>
                 ))}
               </ul>
             </>
