@@ -45,6 +45,11 @@ function GenerationFinder() {
               onChange={(event) => {
                 setBirthYear(event.target.value);
               }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleUserGenerationLogic();
+                }
+              }}
               className={`birth-year-input ${classnames({
                 'error-border': invalidInput,
               })}`}
