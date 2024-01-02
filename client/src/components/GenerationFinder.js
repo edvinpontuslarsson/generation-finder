@@ -115,8 +115,9 @@ function GenerationFinder() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {celebrityObject.name} ({celebrityObject.birthYear})
+                      {celebrityObject.name}
                     </a>
+                    <div>Born in {celebrityObject.birthYear}</div>
                   </div>
                 ))}
               </div>
