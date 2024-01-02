@@ -76,11 +76,22 @@ function GenerationFinder() {
           {userGeneration.famousExamples && (
             <>
               <h3>Famous examples:</h3>
-              <ul>
-                {userGeneration.famousExamples.map((celeb) => (
-                  <li key={celeb.replace(/\s/g, '')}>{celeb}</li>
+              <div className="celebrity-list">
+                {userGeneration.famousExamples.map((celebrityObject) => (
+                  <div
+                    className="celebrity-card"
+                    key={celebrityObject.name.replace(/\s/g, '')}
+                  >
+                    <a
+                      href={celebrityObject.wikiLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {celebrityObject.name} ({celebrityObject.birthYear})
+                    </a>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </>
           )}
           <button
