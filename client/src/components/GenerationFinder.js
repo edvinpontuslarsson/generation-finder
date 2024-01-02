@@ -10,6 +10,23 @@ function GenerationFinder() {
 
   const generationsData = getGenerationsData();
 
+  const handleUserGenerationLogic = () => {
+    const foundGeneration = generationsData.generations.find(
+      // e.g.
+      //       1991         1981           1991         1996
+      (gen) => birthYear >= gen.minYear && birthYear <= gen.maxYear
+    );
+
+    if (foundGeneration) {
+      setUserGeneration(foundGeneration);
+
+      setInvalidInput(false);
+      setDisplayInput(false);
+    } else {
+      setInvalidInput(true);
+    }
+  };
+
   return (
     <>
       <h1>Generation Finder</h1>
@@ -24,9 +41,14 @@ function GenerationFinder() {
               autoFocus
               type="number"
               value={birthYear}
-              placeholder='Birth year'
+              placeholder="Birth year"
               onChange={(event) => {
                 setBirthYear(event.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleUserGenerationLogic();
+                }
               }}
               className={`birth-year-input ${classnames({
                 'error-border': invalidInput,
@@ -41,26 +63,7 @@ function GenerationFinder() {
             )}
           </div>
 
-          <button
-            onClick={() => {
-              const foundGeneration = generationsData.generations.find(
-                // e.g.
-                //       1991         1981           1991         1996
-                (gen) => birthYear >= gen.minYear && birthYear <= gen.maxYear
-              );
-
-              if (foundGeneration) {
-                setUserGeneration(foundGeneration);
-
-                setInvalidInput(false);
-                setDisplayInput(false);
-              } else {
-                setInvalidInput(true);
-              }
-            }}
-          >
-            Find out!
-          </button>
+          <button onClick={handleUserGenerationLogic}>Find out!</button>
         </>
       )}
 
