@@ -23,6 +23,7 @@ function GenerationFinder() {
             <input
               type="number"
               value={birthYear}
+              placeholder='Birth year'
               onChange={(event) => {
                 setBirthYear(event.target.value);
               }}
