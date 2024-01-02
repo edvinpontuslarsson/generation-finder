@@ -58,13 +58,7 @@ function GenerationFinder() {
             )}
           </div>
 
-          <button
-            onClick={() => {
-              handleUserGenerationLogic();
-            }}
-          >
-            Find out!
-          </button>
+          <button onClick={handleUserGenerationLogic}>Find out!</button>
         </>
       )}
 
