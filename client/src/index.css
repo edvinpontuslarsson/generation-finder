@@ -7,7 +7,9 @@ body {
 }
 
 /* Header styles */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: #333;
 }
 
@@ -47,12 +49,31 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Result display styles */
-ul {
-  list-style-type: none;
-  padding: 0;
+/* Celebrity card styles */
+.celebrity-list {
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 50%;
 }
 
-li {
-  margin-bottom: 5px;
+.celebrity-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.celebrity-card a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.celebrity-card a:hover {
+  text-decoration: underline;
 }
