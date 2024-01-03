@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import classnames from 'classnames';
 import { getGenerationsData } from '../api/api';
+import { getThumbnailData } from '../api/wiki';
+import { backupSvgUrl } from '../utils/utils';
 
 function GenerationFinder() {
   const [birthYear, setBirthYear] = useState('');
@@ -8,9 +10,12 @@ function GenerationFinder() {
   const [userGeneration, setUserGeneration] = useState(null);
   const [displayInput, setDisplayInput] = useState(true);
 
+  const [thumbnailCollection, setThumbnailCollection] = useState({});
+  const [thumbnailLoading, setThumbnailLoading] = useState(true);
+
   const generationsData = getGenerationsData();
 
-  const handleUserGenerationLogic = () => {
+  const handleUserGenerationLogic = async () => {
     const foundGeneration = generationsData.generations.find(
       // e.g.
       //       1991         1981           1991         1996
@@ -22,6 +27,29 @@ function GenerationFinder() {
 
       setInvalidInput(false);
       setDisplayInput(false);
+
+      // fetches thumbnail after setting the user generation
+      const thumbnailPromises = foundGeneration.famousExamples.map(
+        (celebrity) =>
+          getThumbnailData(celebrity.name)
+            .then((data) => ({
+              [celebrity.name]: data,
+            }))
+            .catch(() => ({
+              [celebrity.name]: { imageUrl: backupSvgUrl },
+            }))
+      );
+
+      const thumbnailArray = await Promise.all(thumbnailPromises);
+      const thumbnailData = thumbnailArray.reduce(
+        (accumulator, current) => ({
+          ...accumulator,
+          ...current,
+        }),
+        {}
+      );
+
+      setThumbnailCollection(thumbnailData);
     } else {
       setInvalidInput(true);
     }
@@ -29,9 +57,9 @@ function GenerationFinder() {
 
   return (
     <>
-      <h1>Generation Finder</h1>
       {displayInput && (
         <>
+          <h1>Generation Finder</h1>
           <p>
             Please input your year of birth to see which generation you belong
             to.
@@ -82,13 +110,22 @@ function GenerationFinder() {
                     className="celebrity-card"
                     key={celebrityObject.name.replace(/\s/g, '')}
                   >
+                    {thumbnailCollection[celebrityObject.name] && (
+                      <img
+                        src={thumbnailCollection[celebrityObject.name].imageUrl}
+                        alt={celebrityObject.name}
+                        onLoad={() => setThumbnailLoading(false)}
+                        style={{ display: thumbnailLoading ? 'none' : 'block' }}
+                      />
+                    )}
                     <a
                       href={celebrityObject.wikiLink}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {celebrityObject.name} ({celebrityObject.birthYear})
+                      {celebrityObject.name}
                     </a>
+                    <div>Born in {celebrityObject.birthYear}</div>
                   </div>
                 ))}
               </div>

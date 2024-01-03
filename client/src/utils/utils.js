@@ -1,0 +1,1 @@
+export const backupSvgUrl = "data:image/svg+xml;utf8,<svg width='200' height='150' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='10' width='180' height='130' stroke='black' stroke-dasharray='5,5' fill='none' /><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='black' font-size='20' font-family='Arial'>No Image</text></svg>";
