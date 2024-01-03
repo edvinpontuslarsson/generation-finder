@@ -2,6 +2,7 @@ import { useState } from 'react';
 import classnames from 'classnames';
 import { getGenerationsData } from '../api/api';
 import { getThumbnailData } from '../api/wiki';
+import { backupSvgUrl } from '../utils/utils';
 
 function GenerationFinder() {
   const [birthYear, setBirthYear] = useState('');
@@ -10,6 +11,7 @@ function GenerationFinder() {
   const [displayInput, setDisplayInput] = useState(true);
 
   const [thumbnailCollection, setThumbnailCollection] = useState({});
+  const [thumbnailLoading, setThumbnailLoading] = useState(true);
 
   const generationsData = getGenerationsData();
 
@@ -29,9 +31,13 @@ function GenerationFinder() {
       // fetches thumbnail after setting the user generation
       const thumbnailPromises = foundGeneration.famousExamples.map(
         (celebrity) =>
-          getThumbnailData(celebrity.name).then((data) => ({
-            [celebrity.name]: data,
-          }))
+          getThumbnailData(celebrity.name)
+            .then((data) => ({
+              [celebrity.name]: data,
+            }))
+            .catch(() => ({
+              [celebrity.name]: { imageUrl: backupSvgUrl },
+            }))
       );
 
       const thumbnailArray = await Promise.all(thumbnailPromises);
@@ -51,9 +57,9 @@ function GenerationFinder() {
 
   return (
     <>
-      <h1>Generation Finder</h1>
       {displayInput && (
         <>
+          <h1>Generation Finder</h1>
           <p>
             Please input your year of birth to see which generation you belong
             to.
@@ -108,6 +114,8 @@ function GenerationFinder() {
                       <img
                         src={thumbnailCollection[celebrityObject.name].imageUrl}
                         alt={celebrityObject.name}
+                        onLoad={() => setThumbnailLoading(false)}
+                        style={{ display: thumbnailLoading ? 'none' : 'block' }}
                       />
                     )}
                     <a
