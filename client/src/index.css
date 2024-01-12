@@ -56,6 +56,7 @@ button:hover {
 
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap; /* Allow cards to wrap in smaller screens */
   gap: 10px;
 
   width: 50%;
@@ -67,6 +68,20 @@ button:hover {
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  width: calc(
+    33% - 20px
+  ); /* Adjust width for a 3-column layout, adjust the 20px as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items for a neater look */
+}
+
+.celebrity-card img {
+  max-width: 100%; /* Ensure image does not exceed card width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 4px; /* Optional: Round corners for images */
+  margin-bottom: 10px; /* Space between image and text */
 }
 
 .celebrity-card a {
@@ -76,4 +91,16 @@ button:hover {
 
 .celebrity-card a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .celebrity-card {
+    width: calc(50% - 20px); /* 2-column layout on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .celebrity-card {
+    width: 100%; /* 1-column layout for very small screens */
+  }
 }

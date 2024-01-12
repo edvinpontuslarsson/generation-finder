@@ -10,7 +10,7 @@ function GenerationFinder() {
 
   const generationsData = getGenerationsData();
 
-  const handleUserGenerationLogic = () => {
+  const handleUserGenerationLogic = async () => {
     const foundGeneration = generationsData.generations.find(
       // e.g.
       //       1991         1981           1991         1996
@@ -29,9 +29,9 @@ function GenerationFinder() {
 
   return (
     <>
-      <h1>Generation Finder</h1>
       {displayInput && (
         <>
+          <h1>Generation Finder</h1>
           <p>
             Please input your year of birth to see which generation you belong
             to.
@@ -82,13 +82,19 @@ function GenerationFinder() {
                     className="celebrity-card"
                     key={celebrityObject.name.replace(/\s/g, '')}
                   >
+                    <img
+                      src={celebrityObject.image}
+                      alt={celebrityObject.name}
+                      style={{ display: 'block' }}
+                    />
                     <a
                       href={celebrityObject.wikiLink}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {celebrityObject.name} ({celebrityObject.birthYear})
+                      {celebrityObject.name}
                     </a>
+                    <div>Born in {celebrityObject.birthYear}</div>
                   </div>
                 ))}
               </div>
