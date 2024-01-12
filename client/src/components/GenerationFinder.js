@@ -31,7 +31,7 @@ function GenerationFinder() {
     <>
       {displayInput && (
         <>
-          <h1>Generation Finder</h1>
+          <h1 id='generation-finder-top-heading'>Generation Finder</h1>
           <p>
             Please input your year of birth to see which generation you belong
             to.
