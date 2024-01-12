@@ -1,17 +1,12 @@
 import { useState } from 'react';
 import classnames from 'classnames';
 import { getGenerationsData } from '../api/api';
-import { getThumbnailData } from '../api/wiki';
-import { backupSvgUrl } from '../utils/utils';
 
 function GenerationFinder() {
   const [birthYear, setBirthYear] = useState('');
   const [invalidInput, setInvalidInput] = useState(false);
   const [userGeneration, setUserGeneration] = useState(null);
   const [displayInput, setDisplayInput] = useState(true);
-
-  const [thumbnailCollection, setThumbnailCollection] = useState({});
-  const [thumbnailLoading, setThumbnailLoading] = useState(true);
 
   const generationsData = getGenerationsData();
 
@@ -27,29 +22,6 @@ function GenerationFinder() {
 
       setInvalidInput(false);
       setDisplayInput(false);
-
-      // fetches thumbnail after setting the user generation
-      const thumbnailPromises = foundGeneration.famousExamples.map(
-        (celebrity) =>
-          getThumbnailData(celebrity.name)
-            .then((data) => ({
-              [celebrity.name]: data,
-            }))
-            .catch(() => ({
-              [celebrity.name]: { imageUrl: backupSvgUrl },
-            }))
-      );
-
-      const thumbnailArray = await Promise.all(thumbnailPromises);
-      const thumbnailData = thumbnailArray.reduce(
-        (accumulator, current) => ({
-          ...accumulator,
-          ...current,
-        }),
-        {}
-      );
-
-      setThumbnailCollection(thumbnailData);
     } else {
       setInvalidInput(true);
     }
@@ -110,14 +82,11 @@ function GenerationFinder() {
                     className="celebrity-card"
                     key={celebrityObject.name.replace(/\s/g, '')}
                   >
-                    {thumbnailCollection[celebrityObject.name] && (
-                      <img
-                        src={thumbnailCollection[celebrityObject.name].imageUrl}
-                        alt={celebrityObject.name}
-                        onLoad={() => setThumbnailLoading(false)}
-                        style={{ display: thumbnailLoading ? 'none' : 'block' }}
-                      />
-                    )}
+                    <img
+                      src={celebrityObject.image}
+                      alt={celebrityObject.name}
+                      style={{ display: 'block' }}
+                    />
                     <a
                       href={celebrityObject.wikiLink}
                       target="_blank"

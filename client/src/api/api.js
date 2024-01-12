@@ -9,6 +9,7 @@ function getGenerationsData() {
           name: 'ChatGPT',
           birthYear: '2022',
           wikiLink: 'https://en.wikipedia.org/wiki/ChatGPT',
+          image: 'images/ChatGPT_logo.svg'
         },
       ]
     },
