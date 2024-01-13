@@ -27,15 +27,20 @@ describe('Tests of the generation finder', () => {
 
     // TODO maybe I can turn this into a reusable assertion
 
-    // The celebrity list should contain at least 1 element
     cy.get('#celebrity-list')
       .children()
       .should('have.length.at.least', 1)
 
-      // each child should have expected content
+      // each child element should contain expected content
       .each((element) => {
-        // an image
         cy.wrap(element).find('img').should('exist');
+
+        cy.wrap(element).find('a').should('not.be.empty');
+
+        cy.wrap(element)
+          .find('div[id^="celebrity-birth-year-"]')
+          .contains(/born in/i)
+          .should('exist');
       });
   });
 
