@@ -22,7 +22,11 @@ function invalidBirthYearInputTest(invalidInput?: number | string) {
  * The correct generation is displayed after birth year submission.
  * Celebrity list exists and contains expected child elements.
  */
-function happyPathBirthYearTest(birthYear: number, expectedGeneration: RegExp) {
+function happyPathBirthYearTest(
+  birthYear: number,
+  expectedGeneration: RegExp,
+  generationRange: { minYear: number; maxYear: number }
+) {
   cy.get('#birth-year-input').clear().type(`${birthYear}`);
   cy.get('#generation-finder-find-out-button').click();
 

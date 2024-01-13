@@ -18,7 +18,8 @@ declare namespace Cypress {
      */
     happyPathBirthYearTest(
       birthYear: number,
-      expectedGeneration: RegExp
+      expectedGeneration: RegExp,
+      generationRange: { minYear: number; maxYear: number }
     ): Chainable<Element>;
 
     clickTryAgainButton(): Chainable<Element>;
