@@ -28,7 +28,15 @@ describe('Tests of the generation finder', () => {
     // TODO maybe I can turn this into a reusable assertion
 
     // The celebrity list should contain at least 1 element
-    cy.get('#celebrity-list').children().should('have.length.at.least', 1);
+    cy.get('#celebrity-list')
+      .children()
+      .should('have.length.at.least', 1)
+
+      // each child should have expected content
+      .each((element) => {
+        // an image
+        cy.wrap(element).find('img').should('exist');
+      });
   });
 
   it('Upper border analysis for greatest generation, 1927 & 1928', () => {
