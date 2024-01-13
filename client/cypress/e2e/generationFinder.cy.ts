@@ -23,14 +23,14 @@ describe('Tests of the generation finder', () => {
     cy.get('#birth-year-input').clear().type('1901');
     cy.get('#generation-finder-find-out-button').click();
 
-    // TODO maybe I can turn this into a reusable assertion
- 
-    cy.get('#found-generation-heading').contains(/greatest generation/i)
+    cy.get('#found-generation-heading').contains(/greatest generation/i);
 
-    // The celebrity list should
+    // TODO maybe I can turn this into a reusable assertion
+
+    // The celebrity list should contain at least 1 element
+    cy.get('#celebrity-list').children().should('have.length.at.least', 1);
   });
 
-  
   it('Upper border analysis for greatest generation, 1927 & 1928', () => {
     cy.get('#birth-year-error-label').should('not.exist');
 
@@ -43,5 +43,5 @@ describe('Tests of the generation finder', () => {
     // cy.get('#generation-finder-find-out-button').click();
 
     // TODO now ensure that display is correct but for silent generation
-  })
+  });
 });
