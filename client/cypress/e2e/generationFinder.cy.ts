@@ -16,31 +16,18 @@ describe('Tests of the generation finder', () => {
     cy.get('#generation-finder-find-out-button').click();
     cy.get('#birth-year-error-label').should('exist');
 
-    cy.get('#birth-year-input').clear().type('1901');
-    cy.get('#generation-finder-find-out-button').click();
-    cy.get('#birth-year-error-label').should('not.exist');
-
-    cy.get('#found-generation-heading').contains(/greatest generation/i);
-
-    // a custom function added to ../support/commands.ts
-    cy.celebrityListContainsExpectedContent();
+    performHappyPathBirthYearTest(1901, /greatest generation/i);
   });
 
   it('Upper border value analysis for greatest generation, 1927 & 1928', () => {
-    cy.get('#birth-year-input').clear().type('1927');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/greatest generation/i);
-    cy.celebrityListContainsExpectedContent();
+    performHappyPathBirthYearTest(1927, /greatest generation/i);
 
     cy.get('#found-generation-try-again-button').click();
 
-    cy.get('#birth-year-input').clear().type('1928');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/silent generation/i);
-    cy.celebrityListContainsExpectedContent();
+    performHappyPathBirthYearTest(1928, /silent generation/i);
   });
+
+  // TODO continue using happy path up until last alpha
 
   // Lower border value analysis is only necessary for the earliest generation
   // because the lower border value analysis of each generation is identical to
@@ -153,3 +140,18 @@ describe('Tests of the generation finder', () => {
     cy.get('#birth-year-error-label').should('exist');
   });
 });
+
+function performHappyPathBirthYearTest(
+  birthYear: string | number,
+  expectedGeneration: RegExp
+) {
+  cy.get('#birth-year-input').clear().type(`${birthYear}`);
+  cy.get('#generation-finder-find-out-button').click();
+
+  cy.get('#birth-year-error-label').should('not.exist');
+
+  cy.get('#found-generation-heading').contains(expectedGeneration);
+
+  // a custom function added to ../support/commands.ts
+  cy.celebrityListContainsExpectedContent();
+}
