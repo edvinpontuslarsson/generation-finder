@@ -24,20 +24,32 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('celebrityListContainsExpectedContent', () => {
+Cypress.Commands.add(
+  'happyPathBirthYearTest',
+  (birthYear: number, expectedGeneration: RegExp) => {
+    cy.get('#birth-year-input').clear().type(`${birthYear}`);
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#birth-year-error-label').should('not.exist');
+
+    cy.get('#found-generation-heading').contains(expectedGeneration);
+
+    // TODO also test born between string
+
     cy.get('#celebrity-list')
-    .children()
-    .should('have.length.at.least', 1)
+      .children()
+      .should('have.length.at.least', 1)
 
-    // each child element should contain expected content
-    .each((element) => {
-      cy.wrap(element).find('img').should('exist');
+      // each child element should contain expected content
+      .each((element) => {
+        cy.wrap(element).find('img').should('exist');
 
-      cy.wrap(element).find('a').should('not.be.empty');
+        cy.wrap(element).find('a').should('not.be.empty');
 
-      cy.wrap(element)
-        .find('div[id^="celebrity-birth-year-"]')
-        .contains(/born in/i)
-        .should('exist');
-    });
-});
+        cy.wrap(element)
+          .find('div[id^="celebrity-birth-year-"]')
+          .contains(/born in/i)
+          .should('exist');
+      });
+  }
+);

@@ -1,9 +1,15 @@
 declare namespace Cypress {
   interface Chainable {
     /**
-     * Custom command to check the content of the celebrity list.
-     * @example cy.celebrityListContainsExpectedContent()
+     * Asserts that:
+     * Birth year form exists and work as expected.
+     * The error label is not present.
+     * The correct generation is displayed after birth year submission.
+     * Celebrity list exists and contains expected child elements.
      */
-    celebrityListContainsExpectedContent(): Chainable<Element>;
+    happyPathBirthYearTest(
+      birthYear: number,
+      expectedGeneration: RegExp
+    ): Chainable<Element>;
   }
 }
