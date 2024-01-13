@@ -31,13 +31,14 @@ function GenerationFinder() {
     <>
       {displayInput && (
         <>
-          <h1 id='generation-finder-top-heading'>Generation Finder</h1>
-          <p>
+          <h1 id="generation-finder-top-heading">Generation Finder</h1>
+          <p id="generation-finder-start-description">
             Please input your year of birth to see which generation you belong
             to.
           </p>
           <div>
             <input
+              id="birth-year-input"
               autoFocus
               type="number"
               value={birthYear}
@@ -55,7 +56,7 @@ function GenerationFinder() {
               })}`}
             />
             {invalidInput && (
-              <label className="error-label">
+              <label id="birth-year-error-label" className="error-label">
                 Please enter a 4 digit number between{' '}
                 {generationsData.lowestMinYear} and{' '}
                 {generationsData.highestMaxYear}
@@ -63,44 +64,53 @@ function GenerationFinder() {
             )}
           </div>
 
-          <button onClick={handleUserGenerationLogic}>Find out!</button>
+          <button
+            id="generation-finder-find-out-button"
+            onClick={handleUserGenerationLogic}
+          >
+            Find out!
+          </button>
         </>
       )}
 
       {!displayInput && (
         <>
-          <h2>You belong to {userGeneration.title}</h2>
-          <p>
+          <h2 id='found-generation-heading'>You belong to {userGeneration.title}</h2>
+          <p id='found-generation-description'>
             Born between {userGeneration.minYear} and {userGeneration.maxYear}
           </p>
           {userGeneration.famousExamples && (
             <>
-              <h3>Famous examples:</h3>
-              <div className="celebrity-list">
+              <h3 id='celebrity-list-heading'>Famous examples:</h3>
+              <div id='celebrity-list' className="celebrity-list">
                 {userGeneration.famousExamples.map((celebrityObject) => (
                   <div
                     className="celebrity-card"
                     key={celebrityObject.name.replace(/\s/g, '')}
+                    id={`celebrity-card-${celebrityObject.name.replace(/\s/g, '')}`}
                   >
                     <img
                       src={celebrityObject.image}
                       alt={celebrityObject.name}
                       style={{ display: 'block' }}
+                      id={`celebrity-image-${celebrityObject.name.replace(/\s/g, '')}`}
                     />
                     <a
                       href={celebrityObject.wikiLink}
                       target="_blank"
                       rel="noopener noreferrer"
+                      id={`celebrity-link-${celebrityObject.name.replace(/\s/g, '')}`}
                     >
                       {celebrityObject.name}
                     </a>
-                    <div>Born in {celebrityObject.birthYear}</div>
+                    <div id={`celebrity-birth-year-${celebrityObject.name.replace(/\s/g, '')}`}>Born in {celebrityObject.birthYear}</div>
                   </div>
                 ))}
               </div>
             </>
           )}
           <button
+            id='found-generation-try-again-button'
             onClick={() => {
               setBirthYear('');
               setUserGeneration(null);
