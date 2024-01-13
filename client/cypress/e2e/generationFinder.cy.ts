@@ -23,8 +23,11 @@ describe('Tests of the generation finder', () => {
     cy.get('#birth-year-input').clear().type('1901');
     cy.get('#generation-finder-find-out-button').click();
 
-    // TODO ensure display is correct
-    // TODO maybe I can turn that into a reusable assertion
+    // TODO maybe I can turn this into a reusable assertion
+ 
+    cy.get('#found-generation-heading').contains(/greatest generation/i)
+
+    // The celebrity list should
   });
 
   
