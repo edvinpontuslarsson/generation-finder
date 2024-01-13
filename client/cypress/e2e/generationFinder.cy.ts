@@ -1,7 +1,16 @@
-function happyPathBirthYearTest(
-  birthYear: number,
-  expectedGeneration: RegExp
-) {
+function invalidBirthYearInputTest(invalidInput?: number | string) {
+  cy.get('#birth-year-error-label').should('not.exist');
+
+  if (invalidInput) {
+    cy.get('#birth-year-input').clear().type(`${invalidInput}`);
+  }
+
+  cy.get('#generation-finder-find-out-button').click();
+
+  cy.get('#birth-year-error-label').should('exist');
+}
+
+function happyPathBirthYearTest(birthYear: number, expectedGeneration: RegExp) {
   cy.get('#birth-year-input').clear().type(`${birthYear}`);
   cy.get('#generation-finder-find-out-button').click();
 
@@ -13,38 +22,33 @@ function happyPathBirthYearTest(
   cy.celebrityListContainsExpectedContent();
 }
 
+function tryAgain() {
+  cy.get('#found-generation-try-again-button').click();
+}
+
 describe('Tests of the generation finder', () => {
   beforeEach(() => {
     cy.visit('/');
   });
 
   it('Error message if empty birth year', () => {
-    cy.get('#birth-year-error-label').should('not.exist');
-    cy.get('#generation-finder-find-out-button').click();
-    cy.get('#birth-year-error-label').should('exist');
+    invalidBirthYearInputTest();
   });
 
   it('Error message if non-numerical birth year input', () => {
-    cy.get('#birth-year-error-label').should('not.exist');
-
-    cy.get('#birth-year-input').clear().type('non-numerical text');
-    cy.get('#generation-finder-find-out-button').click();
-    cy.get('#birth-year-error-label').should('exist');
+    invalidBirthYearInputTest('non-numerical text');
   });
 
   // The Greatest Generation: 1901 - 1927
 
   it('Lower border value analysis for greatest generation, 1900 & 1901', () => {
-    cy.get('#birth-year-input').clear().type('1900');
-    cy.get('#generation-finder-find-out-button').click();
-    cy.get('#birth-year-error-label').should('exist');
-
+    invalidBirthYearInputTest('1900');
     happyPathBirthYearTest(1901, /greatest generation/i);
   });
 
   it('Upper border value analysis for greatest generation, 1927 & 1928', () => {
     happyPathBirthYearTest(1927, /greatest generation/i);
-    cy.get('#found-generation-try-again-button').click();
+    tryAgain();
     happyPathBirthYearTest(1928, /silent generation/i);
   });
 
@@ -56,7 +60,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Silent Generation, 1945 & 1946', () => {
     happyPathBirthYearTest(1945, /silent generation/i);
-    cy.get('#found-generation-try-again-button').click();
+    tryAgain();
     happyPathBirthYearTest(1946, /boomer/i);
   });
 
@@ -64,7 +68,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Baby Boomers, 1964 & 1965', () => {
     happyPathBirthYearTest(1964, /boomer/i);
-    cy.get('#found-generation-try-again-button').click();
+    tryAgain();
     happyPathBirthYearTest(1965, /generation x/i);
   });
 
@@ -72,7 +76,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Generation X, 1980 & 1981', () => {
     happyPathBirthYearTest(1980, /generation x/i);
-    cy.get('#found-generation-try-again-button').click();
+    tryAgain();
     happyPathBirthYearTest(1981, /millenial/i);
   });
 
@@ -80,7 +84,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Millenials, 1996 & 1997', () => {
     happyPathBirthYearTest(1996, /millenial/i);
-    cy.get('#found-generation-try-again-button').click();
+    tryAgain();
     happyPathBirthYearTest(1997, /z/i);
   });
 
@@ -88,7 +92,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Generation Z, 2012 & 2013', () => {
     happyPathBirthYearTest(2012, /z/i);
-    cy.get('#found-generation-try-again-button').click();
+    tryAgain();
     happyPathBirthYearTest(2013, /generation alpha/i);
   });
 
@@ -96,11 +100,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
     happyPathBirthYearTest(2024, /generation alpha/i);
-
-    cy.get('#found-generation-try-again-button').click();
-
-    cy.get('#birth-year-input').clear().type('2025');
-    cy.get('#generation-finder-find-out-button').click();
-    cy.get('#birth-year-error-label').should('exist');
+    tryAgain();
+    invalidBirthYearInputTest('2025');
   });
 });
