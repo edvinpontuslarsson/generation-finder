@@ -25,8 +25,9 @@ describe('Tests of the generation finder', () => {
   });
 
   it('Error message if non-numerical birth year input', () => {
-    cy.get('#birth-year-input').clear().type('non-numerical text');
     cy.get('#birth-year-error-label').should('not.exist');
+
+    cy.get('#birth-year-input').clear().type('non-numerical text');
     cy.get('#generation-finder-find-out-button').click();
     cy.get('#birth-year-error-label').should('exist');
   });
