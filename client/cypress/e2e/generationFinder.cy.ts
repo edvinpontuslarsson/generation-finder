@@ -9,6 +9,8 @@ describe('Tests of the generation finder', () => {
     cy.get('#birth-year-error-label').should('exist');
   });
 
+  // The Greatest Generation: 1901 - 1927
+
   it('Lower border value analysis for greatest generation, 1900 & 1901', () => {
     cy.get('#birth-year-input').clear().type('1900');
     cy.get('#generation-finder-find-out-button').click();
@@ -38,6 +40,10 @@ describe('Tests of the generation finder', () => {
     cy.get('#found-generation-heading').contains(/silent generation/i);
     cy.celebrityListContainsExpectedContent();
   });
+
+  // TODO then exact same pattern up to gen alpha
+
+  // The Silent Generation: 1928 - 1945
 
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
     cy.get('#birth-year-input').clear().type('2025');
