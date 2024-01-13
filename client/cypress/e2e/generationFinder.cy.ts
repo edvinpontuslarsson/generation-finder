@@ -24,6 +24,13 @@ describe('Tests of the generation finder', () => {
     cy.get('#birth-year-error-label').should('exist');
   });
 
+  it('Error message if non-numerical birth year input', () => {
+    cy.get('#birth-year-input').clear().type('non-numerical text');
+    cy.get('#birth-year-error-label').should('not.exist');
+    cy.get('#generation-finder-find-out-button').click();
+    cy.get('#birth-year-error-label').should('exist');
+  });
+
   // The Greatest Generation: 1901 - 1927
 
   it('Lower border value analysis for greatest generation, 1900 & 1901', () => {
