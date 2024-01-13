@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('celebrityListContainsExpectedContent', () => {
+    cy.get('#celebrity-list')
+    .children()
+    .should('have.length.at.least', 1)
+
+    // each child element should contain expected content
+    .each((element) => {
+      cy.wrap(element).find('img').should('exist');
+
+      cy.wrap(element).find('a').should('not.be.empty');
+
+      cy.wrap(element)
+        .find('div[id^="celebrity-birth-year-"]')
+        .contains(/born in/i)
+        .should('exist');
+    });
+});

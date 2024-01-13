@@ -26,21 +26,7 @@ describe('Tests of the generation finder', () => {
 
     cy.get('#found-generation-heading').contains(/greatest generation/i);
 
-    cy.get('#celebrity-list')
-      .children()
-      .should('have.length.at.least', 1)
-
-      // each child element should contain expected content
-      .each((element) => {
-        cy.wrap(element).find('img').should('exist');
-
-        cy.wrap(element).find('a').should('not.be.empty');
-
-        cy.wrap(element)
-          .find('div[id^="celebrity-birth-year-"]')
-          .contains(/born in/i)
-          .should('exist');
-      });
+    cy.celebrityListContainsExpectedContent();
   });
 
   it('Upper border analysis for greatest generation, 1927 & 1928', () => {
