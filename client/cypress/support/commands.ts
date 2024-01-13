@@ -34,7 +34,12 @@ function happyPathBirthYearTest(
 
   cy.get('#found-generation-heading').contains(expectedGeneration);
 
-  // TODO also test born between string
+  cy.get('#found-generation-description').contains(
+    `${generationRange.minYear}`
+  );
+  cy.get('#found-generation-description').contains(
+    `${generationRange.maxYear}`
+  );
 
   cy.get('#celebrity-list')
     .children()
