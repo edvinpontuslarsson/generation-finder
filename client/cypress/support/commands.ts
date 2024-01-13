@@ -1,50 +1,46 @@
-// TODO put in functions, looks messy now
+function invalidBirthYearInputTest(invalidInput?: number | string) {
+  cy.get('#birth-year-error-label').should('not.exist');
 
-Cypress.Commands.add(
-  'invalidBirthYearInputTest',
-  (invalidInput?: number | string) => {
-    cy.get('#birth-year-error-label').should('not.exist');
-
-    if (invalidInput) {
-      cy.get('#birth-year-input').clear().type(`${invalidInput}`);
-    }
-
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#birth-year-error-label').should('exist');
+  if (invalidInput) {
+    cy.get('#birth-year-input').clear().type(`${invalidInput}`);
   }
-);
 
-Cypress.Commands.add(
-  'happyPathBirthYearTest',
-  (birthYear: number, expectedGeneration: RegExp) => {
-    cy.get('#birth-year-input').clear().type(`${birthYear}`);
-    cy.get('#generation-finder-find-out-button').click();
+  cy.get('#generation-finder-find-out-button').click();
 
-    cy.get('#birth-year-error-label').should('not.exist');
+  cy.get('#birth-year-error-label').should('exist');
+}
 
-    cy.get('#found-generation-heading').contains(expectedGeneration);
+function happyPathBirthYearTest(birthYear: number, expectedGeneration: RegExp) {
+  cy.get('#birth-year-input').clear().type(`${birthYear}`);
+  cy.get('#generation-finder-find-out-button').click();
 
-    // TODO also test born between string
+  cy.get('#birth-year-error-label').should('not.exist');
 
-    cy.get('#celebrity-list')
-      .children()
-      .should('have.length.at.least', 1)
+  cy.get('#found-generation-heading').contains(expectedGeneration);
 
-      // each child element should contain expected content
-      .each((element) => {
-        cy.wrap(element).find('img').should('exist');
+  // TODO also test born between string
 
-        cy.wrap(element).find('a').should('not.be.empty');
+  cy.get('#celebrity-list')
+    .children()
+    .should('have.length.at.least', 1)
 
-        cy.wrap(element)
-          .find('div[id^="celebrity-birth-year-"]')
-          .contains(/born in/i)
-          .should('exist');
-      });
-  }
-);
+    // each child element should contain expected content
+    .each((element) => {
+      cy.wrap(element).find('img').should('exist');
 
-Cypress.Commands.add('clickTryAgainButton', () => {
+      cy.wrap(element).find('a').should('not.be.empty');
+
+      cy.wrap(element)
+        .find('div[id^="celebrity-birth-year-"]')
+        .contains(/born in/i)
+        .should('exist');
+    });
+}
+
+function clickTryAgainButton() {
   cy.get('#found-generation-try-again-button').click();
-});
+}
+
+Cypress.Commands.add('invalidBirthYearInputTest', invalidBirthYearInputTest);
+Cypress.Commands.add('happyPathBirthYearTest', happyPathBirthYearTest);
+Cypress.Commands.add('clickTryAgainButton', clickTryAgainButton);
