@@ -14,8 +14,6 @@ describe('Tests of the generation finder', () => {
   });
 
   it('Lower border analysis for greatest generation, 1900 & 1901', () => {
-    cy.get('#birth-year-error-label').should('not.exist');
-
     cy.get('#birth-year-input').clear().type('1900');
     cy.get('#generation-finder-find-out-button').click();
     cy.get('#birth-year-error-label').should('exist');
@@ -30,16 +28,20 @@ describe('Tests of the generation finder', () => {
   });
 
   it('Upper border analysis for greatest generation, 1927 & 1928', () => {
-    cy.get('#birth-year-error-label').should('not.exist');
-
     cy.get('#birth-year-input').clear().type('1927');
     cy.get('#generation-finder-find-out-button').click();
 
-    // TODO ensure display is correct
+    cy.get('#found-generation-heading').contains(/greatest generation/i);
+    cy.celebrityListContainsExpectedContent();
 
-    // cy.get('#birth-year-input').clear().type('1928');
-    // cy.get('#generation-finder-find-out-button').click();
+    cy.get('#found-generation-try-again-button').click();
 
-    // TODO now ensure that display is correct but for silent generation
+    cy.get('#birth-year-input').clear().type('1928');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/silent generation/i);
+    cy.celebrityListContainsExpectedContent();
   });
+
+  // TODO do for generation alpha now also, special also
 });
