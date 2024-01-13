@@ -22,6 +22,7 @@ describe('Tests of the generation finder', () => {
 
     cy.get('#found-generation-heading').contains(/greatest generation/i);
 
+    // a custom function added to ../support/commands.ts
     cy.celebrityListContainsExpectedContent();
   });
 
