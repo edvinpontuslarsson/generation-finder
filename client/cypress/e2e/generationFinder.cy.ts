@@ -31,8 +31,13 @@ describe('Tests of the generation finder', () => {
   it('Upper border analysis for greatest generation, 1927 & 1928', () => {
     cy.get('#birth-year-error-label').should('not.exist');
 
-    cy.get('#birth-year-input').clear().type('1928');
+    cy.get('#birth-year-input').clear().type('1927');
     cy.get('#generation-finder-find-out-button').click();
+
+    // TODO ensure display is correct
+
+    // cy.get('#birth-year-input').clear().type('1928');
+    // cy.get('#generation-finder-find-out-button').click();
 
     // TODO now ensure that display is correct but for silent generation
   })
