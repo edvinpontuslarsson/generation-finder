@@ -76,7 +76,43 @@ describe('Tests of the generation finder', () => {
   })
 
   // TODO now same for all generations up to gen z
-  // TODO just z search for zoomers
+
+
+  // Baby Boomers: 1946 - 1964
+
+  it('Lower border value analysis for Baby Boomers, 1945 & 1946', () => {
+    cy.get('#birth-year-input').clear().type('1945');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/silent generation/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1946');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/boomer/i);
+    cy.celebrityListContainsExpectedContent();
+  });
+
+  it('Upper border value analysis for Baby Boomers, 1964 & 1965', () => {
+    cy.get('#birth-year-input').clear().type('1964');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/boomer/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1965');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/generation x/i);
+    cy.celebrityListContainsExpectedContent();
+  })
+
+  // TODO generation x (x might occur somewhere), millenial, z
 
   // Generation Alpha: 2013 - 2024
 
