@@ -178,41 +178,39 @@ describe('Tests of the generation finder', () => {
     cy.celebrityListContainsExpectedContent();
   })
 
-  // Baby Boomers: 1946 - 1964
+  // Generation Z: 1997 - 2012
 
-  it('Lower border value analysis for Baby Boomers, 1945 & 1946', () => {
-    cy.get('#birth-year-input').clear().type('1945');
+  it('Lower border value analysis for Generation Z, 1996 & 1997', () => {
+    cy.get('#birth-year-input').clear().type('1996');
     cy.get('#generation-finder-find-out-button').click();
 
-    cy.get('#found-generation-heading').contains(/silent generation/i);
+    cy.get('#found-generation-heading').contains(/millenial/i);
     cy.celebrityListContainsExpectedContent();
 
     cy.get('#found-generation-try-again-button').click();
 
-    cy.get('#birth-year-input').clear().type('1946');
+    cy.get('#birth-year-input').clear().type('1997');
     cy.get('#generation-finder-find-out-button').click();
 
-    cy.get('#found-generation-heading').contains(/boomer/i);
+    cy.get('#found-generation-heading').contains(/z/i);
     cy.celebrityListContainsExpectedContent();
   });
 
-  it('Upper border value analysis for Baby Boomers, 1964 & 1965', () => {
-    cy.get('#birth-year-input').clear().type('1964');
+  it('Upper border value analysis for Generation Z, 2012 & 2013', () => {
+    cy.get('#birth-year-input').clear().type('2012');
     cy.get('#generation-finder-find-out-button').click();
 
-    cy.get('#found-generation-heading').contains(/boomer/i);
+    cy.get('#found-generation-heading').contains(/z/i);
     cy.celebrityListContainsExpectedContent();
 
     cy.get('#found-generation-try-again-button').click();
 
-    cy.get('#birth-year-input').clear().type('1965');
+    cy.get('#birth-year-input').clear().type('2013');
     cy.get('#generation-finder-find-out-button').click();
 
-    cy.get('#found-generation-heading').contains(/generation x/i);
+    cy.get('#found-generation-heading').contains(/generation alpha/i);
     cy.celebrityListContainsExpectedContent();
   })
-
-  // TODO generation x (x might occur somewhere), millenial, z
 
   // Generation Alpha: 2013 - 2024
 
