@@ -16,18 +16,14 @@ describe('Tests of the generation finder', () => {
     cy.get('#generation-finder-find-out-button').click();
     cy.get('#birth-year-error-label').should('exist');
 
-    performHappyPathBirthYearTest(1901, /greatest generation/i);
+    happyPathBirthYearTest(1901, /greatest generation/i);
   });
 
   it('Upper border value analysis for greatest generation, 1927 & 1928', () => {
-    performHappyPathBirthYearTest(1927, /greatest generation/i);
-
+    happyPathBirthYearTest(1927, /greatest generation/i);
     cy.get('#found-generation-try-again-button').click();
-
-    performHappyPathBirthYearTest(1928, /silent generation/i);
+    happyPathBirthYearTest(1928, /silent generation/i);
   });
-
-  // TODO continue using happy path up until last alpha
 
   // Lower border value analysis is only necessary for the earliest generation
   // because the lower border value analysis of each generation is identical to
@@ -36,102 +32,47 @@ describe('Tests of the generation finder', () => {
   // The Silent Generation: 1928 - 1945
 
   it('Upper border value analysis for Silent Generation, 1945 & 1946', () => {
-    cy.get('#birth-year-input').clear().type('1945');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/silent generation/i);
-    cy.celebrityListContainsExpectedContent();
-
+    happyPathBirthYearTest(1945, /silent generation/i);
     cy.get('#found-generation-try-again-button').click();
-
-    cy.get('#birth-year-input').clear().type('1946');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/boomer/i);
-    cy.celebrityListContainsExpectedContent();
+    happyPathBirthYearTest(1946, /boomer/i);
   });
 
   // Baby Boomers: 1946 - 1964
 
   it('Upper border value analysis for Baby Boomers, 1964 & 1965', () => {
-    cy.get('#birth-year-input').clear().type('1964');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/boomer/i);
-    cy.celebrityListContainsExpectedContent();
-
+    happyPathBirthYearTest(1964, /boomer/i);
     cy.get('#found-generation-try-again-button').click();
-
-    cy.get('#birth-year-input').clear().type('1965');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/generation x/i);
-    cy.celebrityListContainsExpectedContent();
+    happyPathBirthYearTest(1965, /generation x/i);
   });
 
   // Generation X: 1965 - 1980
 
   it('Upper border value analysis for Generation X, 1980 & 1981', () => {
-    cy.get('#birth-year-input').clear().type('1980');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/generation x/i);
-    cy.celebrityListContainsExpectedContent();
-
+    happyPathBirthYearTest(1980, /generation x/i);
     cy.get('#found-generation-try-again-button').click();
-
-    cy.get('#birth-year-input').clear().type('1981');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/millenial/i);
-    cy.celebrityListContainsExpectedContent();
+    happyPathBirthYearTest(1981, /millenial/i);
   });
 
   // Millenials: 1981 - 1996
 
   it('Upper border value analysis for Millenials, 1996 & 1997', () => {
-    cy.get('#birth-year-input').clear().type('1996');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/millenial/i);
-    cy.celebrityListContainsExpectedContent();
-
+    happyPathBirthYearTest(1996, /millenial/i);
     cy.get('#found-generation-try-again-button').click();
-
-    cy.get('#birth-year-input').clear().type('1997');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/z/i);
-    cy.celebrityListContainsExpectedContent();
+    happyPathBirthYearTest(1997, /z/i);
   });
 
   // Generation Z: 1997 - 2012
 
   it('Upper border value analysis for Generation Z, 2012 & 2013', () => {
-    cy.get('#birth-year-input').clear().type('2012');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/z/i);
-    cy.celebrityListContainsExpectedContent();
-
+    happyPathBirthYearTest(2012, /z/i);
     cy.get('#found-generation-try-again-button').click();
-
-    cy.get('#birth-year-input').clear().type('2013');
-    cy.get('#generation-finder-find-out-button').click();
-
-    cy.get('#found-generation-heading').contains(/generation alpha/i);
-    cy.celebrityListContainsExpectedContent();
+    happyPathBirthYearTest(2013, /generation alpha/i);
   });
 
   // Generation Alpha: 2013 - 2024
 
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
-    cy.get('#birth-year-input').clear().type('2024');
-    cy.get('#generation-finder-find-out-button').click();
-    cy.get('#birth-year-error-label').should('not.exist');
-
-    cy.get('#found-generation-heading').contains(/generation alpha/i);
-    cy.celebrityListContainsExpectedContent();
+    happyPathBirthYearTest(2024, /generation alpha/i);
 
     cy.get('#found-generation-try-again-button').click();
 
@@ -141,7 +82,7 @@ describe('Tests of the generation finder', () => {
   });
 });
 
-function performHappyPathBirthYearTest(
+function happyPathBirthYearTest(
   birthYear: string | number,
   expectedGeneration: RegExp
 ) {
