@@ -40,6 +40,16 @@ describe('Tests of the generation finder', () => {
   });
 
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
-    // TODO
+    cy.get('#birth-year-input').clear().type('2025');
+    cy.get('#generation-finder-find-out-button').click();
+    cy.get('#birth-year-error-label').should('exist');
+
+    cy.get('#birth-year-input').clear().type('2024');
+    cy.get('#generation-finder-find-out-button').click();
+    cy.get('#birth-year-error-label').should('not.exist');
+
+    cy.get('#found-generation-heading').contains(/generation alpha/i);
+
+    cy.celebrityListContainsExpectedContent();
   });
 });
