@@ -75,8 +75,108 @@ describe('Tests of the generation finder', () => {
     cy.celebrityListContainsExpectedContent();
   })
 
-  // TODO now same for all generations up to gen z
 
+  // Baby Boomers: 1946 - 1964
+
+  it('Lower border value analysis for Baby Boomers, 1945 & 1946', () => {
+    cy.get('#birth-year-input').clear().type('1945');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/silent generation/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1946');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/boomer/i);
+    cy.celebrityListContainsExpectedContent();
+  });
+
+  it('Upper border value analysis for Baby Boomers, 1964 & 1965', () => {
+    cy.get('#birth-year-input').clear().type('1964');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/boomer/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1965');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/generation x/i);
+    cy.celebrityListContainsExpectedContent();
+  })
+
+  // Generation X: 1965 - 1980
+
+  it('Lower border value analysis for Generation X, 1964 & 1965', () => {
+    cy.get('#birth-year-input').clear().type('1964');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/boomer/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1965');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/generation x/i);
+    cy.celebrityListContainsExpectedContent();
+  });
+
+  it('Upper border value analysis for Generation X, 1980 & 1981', () => {
+    cy.get('#birth-year-input').clear().type('1980');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/generation x/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1981');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/millenial/i);
+    cy.celebrityListContainsExpectedContent();
+  })
+
+  // Millenials: 1981 - 1996
+
+  it('Lower border value analysis for Millenials, 1980 & 1981', () => {
+    cy.get('#birth-year-input').clear().type('1980');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/generation x/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1981');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/millenial/i);
+    cy.celebrityListContainsExpectedContent();
+  });
+
+  it('Upper border value analysis for Millenials, 1996 & 1997', () => {
+    cy.get('#birth-year-input').clear().type('1996');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/millenial/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1997');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/z/i);
+    cy.celebrityListContainsExpectedContent();
+  })
 
   // Baby Boomers: 1946 - 1964
 
