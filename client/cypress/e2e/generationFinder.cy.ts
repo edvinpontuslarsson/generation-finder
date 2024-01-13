@@ -1,7 +1,3 @@
-function tryAgain() {
-  cy.get('#found-generation-try-again-button').click();
-}
-
 // invalidBirthYearInputTest  is a custom function added to the cy object
 // happyPathBirthYearTest     is a custom function added to the cy object
 // tryAgain                   is a custom function added to the cy object
@@ -30,7 +26,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for greatest generation, 1927 & 1928', () => {
     cy.happyPathBirthYearTest(1927, /greatest generation/i);
-    tryAgain();
+    cy.clickTryAgainButton();
     cy.happyPathBirthYearTest(1928, /silent generation/i);
   });
 
@@ -42,7 +38,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Silent Generation, 1945 & 1946', () => {
     cy.happyPathBirthYearTest(1945, /silent generation/i);
-    tryAgain();
+    cy.clickTryAgainButton();
     cy.happyPathBirthYearTest(1946, /boomer/i);
   });
 
@@ -50,7 +46,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Baby Boomers, 1964 & 1965', () => {
     cy.happyPathBirthYearTest(1964, /boomer/i);
-    tryAgain();
+    cy.clickTryAgainButton();
     cy.happyPathBirthYearTest(1965, /generation x/i);
   });
 
@@ -58,7 +54,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Generation X, 1980 & 1981', () => {
     cy.happyPathBirthYearTest(1980, /generation x/i);
-    tryAgain();
+    cy.clickTryAgainButton();
     cy.happyPathBirthYearTest(1981, /millenial/i);
   });
 
@@ -66,7 +62,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Millenials, 1996 & 1997', () => {
     cy.happyPathBirthYearTest(1996, /millenial/i);
-    tryAgain();
+    cy.clickTryAgainButton();
     cy.happyPathBirthYearTest(1997, /z/i);
   });
 
@@ -74,7 +70,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for Generation Z, 2012 & 2013', () => {
     cy.happyPathBirthYearTest(2012, /z/i);
-    tryAgain();
+    cy.clickTryAgainButton();
     cy.happyPathBirthYearTest(2013, /generation alpha/i);
   });
 
@@ -82,7 +78,7 @@ describe('Tests of the generation finder', () => {
 
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
     cy.happyPathBirthYearTest(2024, /generation alpha/i);
-    tryAgain();
+    cy.clickTryAgainButton();
     cy.invalidBirthYearInputTest(2025);
   });
 });

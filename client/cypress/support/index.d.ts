@@ -20,5 +20,7 @@ declare namespace Cypress {
       birthYear: number,
       expectedGeneration: RegExp
     ): Chainable<Element>;
+
+    clickTryAgainButton(): Chainable<Element>;
   }
 }
