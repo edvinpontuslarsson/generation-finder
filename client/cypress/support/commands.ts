@@ -25,6 +25,21 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add(
+  'invalidBirthYearInputTest',
+  (invalidInput?: number | string) => {
+    cy.get('#birth-year-error-label').should('not.exist');
+
+    if (invalidInput) {
+      cy.get('#birth-year-input').clear().type(`${invalidInput}`);
+    }
+
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#birth-year-error-label').should('exist');
+  }
+);
+
+Cypress.Commands.add(
   'happyPathBirthYearTest',
   (birthYear: number, expectedGeneration: RegExp) => {
     cy.get('#birth-year-input').clear().type(`${birthYear}`);

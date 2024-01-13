@@ -1,18 +1,3 @@
-// TODO maybe add all of these to ../support/commands.ts
-// then this will be clean and language agnostic
-
-function invalidBirthYearInputTest(invalidInput?: number | string) {
-  cy.get('#birth-year-error-label').should('not.exist');
-
-  if (invalidInput) {
-    cy.get('#birth-year-input').clear().type(`${invalidInput}`);
-  }
-
-  cy.get('#generation-finder-find-out-button').click();
-
-  cy.get('#birth-year-error-label').should('exist');
-}
-
 function tryAgain() {
   cy.get('#found-generation-try-again-button').click();
 }
@@ -29,17 +14,17 @@ describe('Tests of the generation finder', () => {
   });
 
   it('Error message if empty birth year', () => {
-    invalidBirthYearInputTest();
+    cy.invalidBirthYearInputTest();
   });
 
   it('Error message if non-numerical birth year input', () => {
-    invalidBirthYearInputTest('non-numerical text');
+    cy.invalidBirthYearInputTest('non-numerical text');
   });
 
   // The Greatest Generation: 1901 - 1927
 
   it('Lower border value analysis for greatest generation, 1900 & 1901', () => {
-    invalidBirthYearInputTest(1900);
+    cy.invalidBirthYearInputTest(1900);
     cy.happyPathBirthYearTest(1901, /greatest generation/i);
   });
 
@@ -98,6 +83,6 @@ describe('Tests of the generation finder', () => {
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
     cy.happyPathBirthYearTest(2024, /generation alpha/i);
     tryAgain();
-    invalidBirthYearInputTest(2025);
+    cy.invalidBirthYearInputTest(2025);
   });
 });
