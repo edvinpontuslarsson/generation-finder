@@ -75,6 +75,27 @@ describe('Tests of the generation finder', () => {
     cy.celebrityListContainsExpectedContent();
   })
 
+  // TODO now same for all generations up to gen z
+  // TODO just z search for zoomers
+
+  // Generation Alpha: 2013 - 2024
+
+  it('Lower border value analysis for generation Alpha, 2012 & 2013', () => {
+    cy.get('#birth-year-input').clear().type('2012');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/z/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('2013');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/generation alpha/i);
+    cy.celebrityListContainsExpectedContent();
+  })
+
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
     cy.get('#birth-year-input').clear().type('2025');
     cy.get('#generation-finder-find-out-button').click();
