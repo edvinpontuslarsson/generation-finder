@@ -22,10 +22,9 @@ describe('Tests of the generation finder', () => {
 
     cy.get('#birth-year-input').clear().type('1901');
     cy.get('#generation-finder-find-out-button').click();
+    cy.get('#birth-year-error-label').should('not.exist');
 
     cy.get('#found-generation-heading').contains(/greatest generation/i);
-
-    // TODO maybe I can turn this into a reusable assertion
 
     cy.get('#celebrity-list')
       .children()
