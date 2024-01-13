@@ -10,7 +10,7 @@ function GenerationFinder() {
 
   const generationsData = getGenerationsData();
 
-  const handleUserGenerationLogic = async () => {
+  const handleUserGenerationLogic = () => {
     const foundGeneration = generationsData.generations.find(
       // e.g.
       //       1991         1981           1991         1996
@@ -75,42 +75,63 @@ function GenerationFinder() {
 
       {!displayInput && (
         <>
-          <h2 id='found-generation-heading'>You belong to {userGeneration.title}</h2>
-          <p id='found-generation-description'>
+          <h2 id="found-generation-heading">
+            You belong to {userGeneration.title}
+          </h2>
+          <p id="found-generation-description">
             Born between {userGeneration.minYear} and {userGeneration.maxYear}
           </p>
           {userGeneration.famousExamples && (
             <>
-              <h3 id='celebrity-list-heading'>Famous examples:</h3>
-              <div id='celebrity-list' className="celebrity-list">
-                {userGeneration.famousExamples.map((celebrityObject) => (
+              <h3 id="celebrity-list-heading">Famous examples:</h3>
+              <div id="celebrity-list" className="celebrity-list">
+                {userGeneration.famousExamples.map((celebrityObject, index) => (
                   <div
                     className="celebrity-card"
-                    key={celebrityObject.name.replace(/\s/g, '')}
-                    id={`celebrity-card-${celebrityObject.name.replace(/\s/g, '')}`}
+                    key={`celebrity-card-${index}-${celebrityObject.name.replace(
+                      /^[0-9]|[^a-zA-Z0-9-_:.]/g,
+                      ''
+                    )}`}
+                    id={`celebrity-card-${index}-${celebrityObject.name.replace(
+                      /^[0-9]|[^a-zA-Z0-9-_:.]/g,
+                      ''
+                    )}`}
                   >
                     <img
                       src={celebrityObject.image}
                       alt={celebrityObject.name}
                       style={{ display: 'block' }}
-                      id={`celebrity-image-${celebrityObject.name.replace(/\s/g, '')}`}
+                      id={`celebrity-image-${index}-${celebrityObject.name.replace(
+                        /^[0-9]|[^a-zA-Z0-9-_:.]/g,
+                        ''
+                      )}`}
                     />
                     <a
                       href={celebrityObject.wikiLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      id={`celebrity-link-${celebrityObject.name.replace(/\s/g, '')}`}
+                      id={`celebrity-link-${index}-${celebrityObject.name.replace(
+                        /^[0-9]|[^a-zA-Z0-9-_:.]/g,
+                        ''
+                      )}`}
                     >
                       {celebrityObject.name}
                     </a>
-                    <div id={`celebrity-birth-year-${celebrityObject.name.replace(/\s/g, '')}`}>Born in {celebrityObject.birthYear}</div>
+                    <div
+                      id={`celebrity-birth-year-${index}-${celebrityObject.name.replace(
+                        /^[0-9]|[^a-zA-Z0-9-_:.]/g,
+                        ''
+                      )}`}
+                    >
+                      Born in {celebrityObject.birthYear}
+                    </div>
                   </div>
                 ))}
               </div>
             </>
           )}
           <button
-            id='found-generation-try-again-button'
+            id="found-generation-try-again-button"
             onClick={() => {
               setBirthYear('');
               setUserGeneration(null);
