@@ -1,3 +1,6 @@
+// TODO maybe add all of these to ../support/commands.ts
+// then this will be clean and language agnostic
+
 function invalidBirthYearInputTest(invalidInput?: number | string) {
   cy.get('#birth-year-error-label').should('not.exist');
 
@@ -26,6 +29,12 @@ function tryAgain() {
   cy.get('#found-generation-try-again-button').click();
 }
 
+// invalidBirthYearInputTest  is a custom function added to the cy object
+// happyPathBirthYearTest     is a custom function added to the cy object
+// tryAgain                   is a custom function added to the cy object
+
+// see the file "../support/commands.ts" for custom functions
+
 describe('Tests of the generation finder', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -42,7 +51,7 @@ describe('Tests of the generation finder', () => {
   // The Greatest Generation: 1901 - 1927
 
   it('Lower border value analysis for greatest generation, 1900 & 1901', () => {
-    invalidBirthYearInputTest('1900');
+    invalidBirthYearInputTest(1900);
     happyPathBirthYearTest(1901, /greatest generation/i);
   });
 
@@ -101,6 +110,6 @@ describe('Tests of the generation finder', () => {
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
     happyPathBirthYearTest(2024, /generation alpha/i);
     tryAgain();
-    invalidBirthYearInputTest('2025');
+    invalidBirthYearInputTest(2025);
   });
 });
