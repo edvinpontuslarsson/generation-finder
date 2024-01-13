@@ -6,13 +6,27 @@ Web app to see which generation you belong to. Repo will include end-to-end test
 
 https://generation-finder.web.app/
 
-## Docker Instructions
+## Cypress Instructions
 
-### Run with Docker
+### Open Cypress test runner
+
+```bash
+npx cypress open
+```
+
+### Run Cypress tests directly
+
+```bash
+npx cypress run
+```
+
+## Docker-compose Instructions
+
+### Run with Docker-compose
 
 Be navigated to this root directory in a terminal and enter command:
 
-```console
+```bash
 docker-compose up
 ```
 
@@ -22,19 +36,19 @@ http://localhost:3000/
 
 ### Tear down
 
-```console
+```bash
 docker-compose down
 ```
 
 ### Rebuild
 
-```console
+```bash
 docker-compose up --build
 ```
 
 ## Publish to Firebase Instructions
 
-```console
+```bash
 cd client
 npm run build
 firebase deploy
