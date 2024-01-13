@@ -1,5 +1,5 @@
 function happyPathBirthYearTest(
-  birthYear: string | number,
+  birthYear: number,
   expectedGeneration: RegExp
 ) {
   cy.get('#birth-year-input').clear().type(`${birthYear}`);
