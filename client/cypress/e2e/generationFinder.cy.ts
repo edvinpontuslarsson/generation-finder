@@ -2,7 +2,7 @@
 // happyPathBirthYearTest     is a custom function added to the cy object
 // tryAgain                   is a custom function added to the cy object
 
-// see the file "../support/commands.ts" for custom functions
+// see the file "../support/e2eHelpers.ts" for custom functions
 
 const greatestGenerationRange = {
   minYear: 1901,
