@@ -59,6 +59,22 @@ describe('Tests of the generation finder', () => {
     cy.celebrityListContainsExpectedContent();
   });
 
+  it('Upper border value analysis for Silent Generation, 1945 & 1946', () => {
+    cy.get('#birth-year-input').clear().type('1945');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/silent generation/i);
+    cy.celebrityListContainsExpectedContent();
+
+    cy.get('#found-generation-try-again-button').click();
+
+    cy.get('#birth-year-input').clear().type('1946');
+    cy.get('#generation-finder-find-out-button').click();
+
+    cy.get('#found-generation-heading').contains(/boomer/i);
+    cy.celebrityListContainsExpectedContent();
+  })
+
   it('Upper border value analysis for generation Alpha, 2024 & 2025', () => {
     cy.get('#birth-year-input').clear().type('2025');
     cy.get('#generation-finder-find-out-button').click();
