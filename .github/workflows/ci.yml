@@ -18,24 +18,18 @@ jobs:
                 node-version: '20'
 
             - name: Install Dependencies
-              run: |
-                cd client
-                npm install
+              run: npm i
 
             - name: Start React Development Server
               # "&" puts process in background
-              run: |
-                cd client
-                npm start &
+              run: npm start &
                 echo "ReactAppPID=$!" >> $GITHUB_ENV
 
             - name: Wait for React Development Server to Start
               run: npm i -g wait-on && wait-on http://localhost:3000
 
             - name: Run E2E Test Suite
-              run: |
-                cd client
-                npx cypress run
+              run: npx cypress run
 
             - name: Stop React Development Server
               if: always()
