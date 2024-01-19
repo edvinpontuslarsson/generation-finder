@@ -20,32 +20,6 @@ npx cypress open
 npx cypress run
 ```
 
-## Docker-compose Instructions
-
-### Run with Docker-compose
-
-Be navigated to this root directory in a terminal and enter command:
-
-```bash
-docker-compose up
-```
-
-When finished, the web client will be available on port 3000
-
-http://localhost:3000/
-
-### Tear down
-
-```bash
-docker-compose down
-```
-
-### Rebuild
-
-```bash
-docker-compose up --build
-```
-
 ## Publish to Firebase Instructions
 
 ```bash
