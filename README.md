@@ -6,7 +6,7 @@ Web app to see which generation you belong to.
 
 When a Pull Request to the main branch is opened, it triggers the following pipeline: [Run E2E Tests and Publish to Preview Site](.github/workflows/test-and-preview.yml).
 
-This pipeline runs an end-to-end test suite with Cypress, including border value analysis to ensure the user is provided with the correct generation information. If these tests pass, the application is deployed to a preview Firebase URL.
+This pipeline runs an end-to-end test suite with Cypress, including border value analysis. If these tests pass, the application is deployed to a preview Firebase URL.
 
 ## Continuous Deployment
 
