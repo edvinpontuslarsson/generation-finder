@@ -6,13 +6,13 @@ Web app to see which generation you belong to.
 
 When a Pull Request to the main branch is opened, it triggers the following pipeline: [Run E2E Tests and Publish to Preview Site](.github/workflows/test-and-preview.yml).
 
-This pipeline runs an end-to-end test suite with Cypress, including border value analysis to ensure the user is provided with the correct generation information. If these tests pass, the application is deployed to a preview Firebase URL. If the tests fail, the deployment does not proceed, ensuring that only verified changes are deployed to the preview site.
+This pipeline runs an end-to-end test suite with Cypress, including border value analysis to ensure the user is provided with the correct generation information. If these tests pass, the application is deployed to a preview Firebase URL.
 
 ## Continuous Deployment
 
 When a commit is pushed to the main branch, that triggers the following pipeline: [Deploy to Firebase Hosting on merge](.github/workflows/firebase-hosting-merge.yml).
 
-This pipeline deploys the application to the production Firebase URL. Commits are typically pushed to the main branch after thorough code reviews and approvals, ensuring that only quality, tested code is deployed to production.
+This pipeline deploys the application to the production Firebase URL.
 
 ## Public URL
 
