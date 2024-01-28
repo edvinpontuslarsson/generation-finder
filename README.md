@@ -2,6 +2,10 @@
 
 Web app to see which generation you belong to. 
 
+## Public URL
+
+https://generation-finder.web.app/
+
 ## Continuous Integration and Testing
 
 When a Pull Request to the main branch is opened, it triggers the following pipeline: [Run E2E Tests and Publish to Preview Site](.github/workflows/test-and-preview.yml).
@@ -15,10 +19,6 @@ If the tests pass, the application is deployed to a preview Firebase URL.
 When a commit is pushed to the main branch, that triggers the following pipeline: [Deploy to Firebase Hosting on merge](.github/workflows/firebase-hosting-merge.yml).
 
 This pipeline deploys the application to the production Firebase URL.
-
-## Public URL
-
-https://generation-finder.web.app/
 
 ## Cypress Instructions
 
